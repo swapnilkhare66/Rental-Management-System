@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+</head>
+
+<body>
+    <!-- Loader Component -->
+    <app-loader></app-loader>
+
+    <div class="header">
+        <a href="/landing" class="title">RENTAL MANAGEMENT SYSTEM</a>
+
+        <!-- Location Dropdown -->
+        <div class="header-right">
+            <ul class="top-level-menu">
+                <li>
+                    <a id="selectLocation" (click)="firstLevel()">Select Location</a>
+                    <ul class="second-level-menu" *ngIf="catalogService.isopenSecondMenu">
+                        <ng-container *ngFor="let location of locations;let i = index;">
+                            <li><a>{{location}}</a>
+                                <ul class="third-level-menu">
+                                    <ng-container *ngFor="let branch of branches[i]">
+                                        <li><a (click)="goToCategory(branch)">{{branch.name}}</a></li>
+                                        <hr>
+                                    </ng-container>
+                                </ul>
+                            </li>
+                            <hr>
+                        </ng-container>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

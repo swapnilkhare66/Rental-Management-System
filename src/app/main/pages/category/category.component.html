@@ -1,0 +1,48 @@
+<html>
+
+<body>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <pre
+            *ngIf="catalogService.selectedBranch"><span (click)="goback()">Equipment Catalog</span> <span *ngIf="catalogService.isSelectedCategory">/</span> <span *ngIf="catalogService.isSelectedCategory && catalogService.selectedCategory">{{categoryName}}</span></pre>
+    </div>
+
+    <!-- Category Cards -->
+    <div fxLayout="row wrap" class="content" role="main">
+        <ng-container *ngIf="!catalogService.isSelectedCategory && catalogService.selectedBranch">
+            <div (click)="goToSubCategory(category)" fxLayoutGap="10px" fxLayout="column" fxFlex="25%" fxFlex.xs="100%"
+                fxFlex.md="30%" fxFlex.sm="45%" class="card-container"
+                *ngFor="let category of catalogService.selectedBranch.categories">
+                <div class="card">
+                    <img class="img" src="{{'./../../../../assets/images/' + category.image}}"
+                        onerror="this.src='./../../../../assets/images/no-image.png'">
+                    <div fxLayout="row" fxLayoutAlign="center center" class="card-footer">
+                        <p>{{category.name}}</p>
+                        <div class="arrow-right"></div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- SubCategory Cards -->
+        <ng-container *ngIf="catalogService.isSelectedCategory && catalogService.selectedCategory">
+            <div fxLayoutGap="10px" fxLayout="column" fxFlex="25%" fxFlex.xs="100%" fxFlex.md="30%" fxFlex.sm="45%"
+                class="card-container" *ngFor="let subcategory of catalogService.selectedCategory">
+                <div class="card">
+                    <img class="img" src="{{'./../../../../assets/images/subcategory/' + subcategory.image}}"
+                        onerror="this.src='./../../../../assets/images/no-image.png'">
+                    <div fxLayout="row" fxLayoutAlign="center center" class="card-footer">
+                        <p>{{subcategory.name}}</p>
+                        <div class="arrow-right"></div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+</body>
+
+</html>
